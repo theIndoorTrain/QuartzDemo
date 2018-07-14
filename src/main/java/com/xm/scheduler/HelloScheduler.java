@@ -1,5 +1,8 @@
 package com.xm.scheduler;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import org.quartz.JobBuilder;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
@@ -26,6 +29,19 @@ public class HelloScheduler {
 				.build();
 		
 		/**
+		 * 1.获取系统时间
+		 * 2.定义开始时间
+		 * 3.定义结束时间
+		 */
+		SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH-mm-ss");
+		Date nowTime = new Date();
+		System.out.println("Now Time:"+sf.format(nowTime));
+		Date startTime = new Date(nowTime.getTime()+5000);
+		System.out.println("Start Time:"+sf.format(startTime));
+		Date endTime = new Date(nowTime.getTime()+30000);
+		System.out.println("End Time:"+sf.format(endTime));
+		
+		/**
 		 * 1.定义一个trigger
 		 * 2.绑定group，name
 		 * 3.指定开始、结束时间
@@ -36,11 +52,11 @@ public class HelloScheduler {
 				//绑定group，name
 				.withIdentity("trigger1", "group1")
 				//从现在开始执行
-				.startNow()
+				//.startNow()
 				//指定开始执行时间
-				//.startAt()
+				.startAt(startTime)
 				//指定结束执行时间
-				//.endAt()
+				.endAt(endTime)
 				.withSchedule(
 						SimpleScheduleBuilder.simpleSchedule()
 							//执行间隔时间

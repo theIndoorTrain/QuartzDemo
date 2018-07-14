@@ -54,7 +54,7 @@ public class CronHelloScheduler {
 				.withSchedule(
 						CronScheduleBuilder
 						//定义cron表达式规则
-						.cronSchedule("30 43 10 * * ?")
+						.cronSchedule("0/11 50-52 10 ? * 7")
 						)
 				.build();
 		
